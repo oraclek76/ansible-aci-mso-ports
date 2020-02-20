@@ -2,13 +2,13 @@
 
 ## This is an ansible Playbook that allows you to create multiple ports on the Multi SIte Orchestrator
 
- Purpose:
+## Purpose:
   This Ansible playbook will assigns one or more ports to an EPG inside the 
   Multi-Site Orchestrator using a csv file.  
   This script will loop allowing multiple ports during the execution
   of the playbook.  
 
-  !!! NOTE !!! This does NOT DEPLOY the ports.  This only creates
+###  !!! NOTE !!! This does NOT DEPLOY the ports.  This only creates
   inside of the MSO.  
 
  Requriements: 
