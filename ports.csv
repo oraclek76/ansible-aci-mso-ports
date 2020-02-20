@@ -1,0 +1,4 @@
+schema,template,site,anp,epg,leaf,path,vlan
+multisite-schema-01,template1,Site2,anp1,epg-600,1001,eth1/49,600
+multisite-schema-01,template1,Site2,anp1,epg-600,1001,eth1/50,601
+multisite-schema-01,template1,Site2,anp1,epg-600,1001,eth1/48,602

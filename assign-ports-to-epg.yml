@@ -1,0 +1,113 @@
+---
+
+#
+# Purpose:
+#  This Ansible playbook will assigns one or more ports to an EPG inside the 
+#  Multi-Site Orchestrator using a csv file.  
+#  This script will loop allowing multiple ports during the execution
+#  of the playbook.  
+#
+#  !!! NOTE !!! This does NOT DEPLOY the ports.  This only creates
+#  inside of the MSO.  
+# 
+# Requriements: 
+# The following objects are created in the MSO:
+# - Schema
+# - Template(s)
+# - ANP/AP
+# - EPG
+# - BD
+# - VRF
+# The Domain must already be attached to the EPG at the Site level 
+# The Site(s) must be configured properly to allow Switch/Port
+# assignments.
+#
+# Instructions:
+# 1. Download all files and save to the desired folder. 
+# 2. Ensure to put the all file into a group_vars subfolder
+# 3. modify the hosts file to include the ip address of the MSO
+# 4. Modify the all file in the group_vars folder to include the 
+#    username and password
+# 5. Modify the ports.csv file for all parameters needed.
+# 
+# Additional Info:
+# This was created with Ansible 2.9.5 and Python 3.6.9
+# Tested on MSO version 2.1(2g)
+# Assumes single pod.  If multi pod you would need to modify
+# the pod to have a variable and add that to the csv.
+#
+# Created on 2/20/2020
+# Created by Kennie Albritton
+#
+# Special thanks to Don Sykes, Thomas Renzy, David Pryor, and Daniel Schmidt for 
+# the assists.  I could not get it working without all of your help!
+#
+######################################
+#########    Begin Code    ###########
+######################################
+#
+- name: Associate Ports to EPG inside the MSO Schema
+# 
+  hosts: mso
+  gather_facts: false
+#
+# The below mso_login vars area creates a login script that allows 
+# repeated login usage.  inventory_hostname is pointed to the hosts 
+# file when the -i hosts switch is used.
+# 
+  vars:
+    mso_login: &mso_login
+      hostname: '{{ inventory_hostname }}'
+      username: '{{ user }}'
+      password: '{{ pass }}'
+      validate_certs: false
+#
+# Begin the tasks and modules
+#
+  tasks:
+  - name: Read users from CSV file and return a dictionary
+#
+# read_csv is an ansible module.  See ansible docs for usage
+#
+    read_csv:
+    # Name of the csv
+      path: ports.csv
+    #
+    # Creates register value for list
+    #
+    register: csvimport
+    delegate_to: localhost
+  #
+  # Used for debugging purposes to make sure list is correct.
+  # use remarks (#) to hide once verified operational
+  # use -vv or -vvv to see output
+  #
+  #- debug:
+  #    msg: Tenant {{ csvimport.list.0.schema }}
+  #
+  # "mso_schema_site_anp_epg_staticport" is an ansible module.  
+  # See ansible documentation for proper usage
+  #
+  - name: Add a new static port to a site EPG
+    mso_schema_site_anp_epg_staticport:
+      <<: *mso_login
+      state: present
+      schema: "{{ item.schema }}"
+      template: "{{ item.template }}"
+      site: "{{ item.site }}"
+      anp: "{{ item.anp }}"
+      epg: "{{ item.epg }}"
+      type: port
+      pod: pod-1
+      leaf: "{{ item.leaf }}"
+      path: "{{ item.path }}"
+      vlan: "{{ item.vlan }}"
+      deployment_immediacy: immediate
+    # 
+    # inserts loop to cycle through csv
+    #
+    loop: "{{ csvimport.list }}"
+
+######################################
+#########    End Code    #############
+######################################
