@@ -8,7 +8,7 @@
   This script will loop allowing multiple ports during the execution
   of the playbook.  
 
-###  !!! NOTE !!! This does NOT DEPLOY the ports.  This only creates inside of the MSO.  
+###  !!! NOTE !!! This does NOT DEPLOY the ports.  This only assigns the ports inside of the MSO configuration.  
 
 ### Requriements: 
  The following objects are created in the MSO:
