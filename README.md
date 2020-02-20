@@ -41,3 +41,5 @@ This is an ansible Playbook that allows you to create multiple ports on the Mult
 #
 # Special thanks to Don Sykes, Thomas Renzy, David Pryor, and Daniel Schmidt for 
 # the assists.  I could not get it working without all of your help!
+## License & copyright
+@ Kennie D Albritton
