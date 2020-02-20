@@ -8,9 +8,9 @@
   This script will loop allowing multiple ports during the execution
   of the playbook.  
 
-###  !!! NOTE !!! This does NOT DEPLOY the ports.  This only assigns the ports inside of the MSO configuration.  
+##  !!! NOTE !!! This does NOT DEPLOY the ports.  This only assigns the ports inside of the MSO configuration.  
 
-### Requriements: 
+# Requriements: 
  The following objects are created in the MSO:
  - Schema
  - Template(s)
@@ -22,7 +22,7 @@
  The Site(s) must be configured properly to allow Switch/Port
  assignments.
 
-### Instructions:
+# Instructions:
  1. Download all files and save to the desired folder. 
  2. Ensure to put the all file into a group_vars subfolder
  3. modify the hosts file to include the ip address of the MSO
@@ -36,12 +36,12 @@
  Assumes single pod.  If multi pod you would need to modify
  the pod to have a variable and add that to the csv.
 
-#### Created on 2/20/2020
-#### Created by Kennie Albritton
+### Created on 2/20/2020
+### Created by Kennie Albritton
 
 # Special thanks to Don Sykes, Thomas Renzy, David Pryor, and Daniel Schmidt for  the assists.  I could not get it working without all of your help!
 
-# License & copyright
+### License & copyright
 @ Kennie D Albritton Jr
 
-# Licensed under the [GNU General Public License v3.0](LICENSE).
+### Licensed under the [GNU General Public License v3.0](LICENSE).
