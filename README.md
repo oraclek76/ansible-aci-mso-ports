@@ -6,7 +6,7 @@
   This Ansible playbook will assigns one or more ports to an EPG inside the 
   Multi-Site Orchestrator using a csv file.  
   This script will loop allowing multiple ports during the execution
-  of the playbook.  
+  of the playbook.  (Entered for git testing)
 
 ##  !!! NOTE !!! This does NOT DEPLOY the ports.  This only assigns the ports inside of the MSO configuration.  
 
