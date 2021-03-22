@@ -25,7 +25,7 @@
 # Instructions:
  1. Download all files and save to the desired folder. 
  2. Ensure to put the all file into a group_vars subfolder
- 3. modify the hosts file to include the ip address of the MSO
+ 3. Modify the hosts file to include the ip address of the MSO
  4. Modify the all file in the group_vars folder to include the 
     username and password
  5. Modify the ports.csv file for all parameters needed.
